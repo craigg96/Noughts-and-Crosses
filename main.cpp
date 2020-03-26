@@ -4,21 +4,30 @@
 using namespace std;
 
 // Declare Objects
-Board board;
-Game Game1;
+Board board_;
+Game game;
 
 int main() {
 	cout << "Welcome to naughts and crosses!" << endl;
 
-	board.DrawBoard(board.BoardInit);
+	board_.DrawBoard(board_.BoardInit);
 
-
-	Game1.StartGame();	
+	game.StartGame();	
 	
-	while (Game1.GameOver == false) {
-		Game1.turn();
+	while (game.GameOver == false) {
+		game.turn();
 	}
+	
+	cout << "Game Over" << endl;
 
+	if (game.draw == true) {
+		cout << "It's a draw!" << endl;
+	}
+	else
+	{
+		cout << "Player " << game.WhoseTurn << " Wins!" << endl;
+
+	}
 
 	cout << "press enter to quit" << endl;
 	cin.get();

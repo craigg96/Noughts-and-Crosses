@@ -1,13 +1,14 @@
-#include "Game.h"
+
 #include "Board.h"
+#include "Game.h"
 #include <iostream>
 using namespace std;
 
-Board gameboard;
+Board board;
 
 void Game::StartGame()
 {
-	gameboard.SelectCharachters();
+	board.SelectCharachters();
 	Game::WhoseTurn = 1;
 }
 
@@ -20,12 +21,19 @@ void Game::turn()
 	
 	Game::amend_state();
 
-	gameboard.DrawBoard(Game::state);
+	board.DrawBoard(Game::state);
+
+	 Game::scan_state(Game::state);
+
+	if (GameOver == true) {
+		return;
+	}
 
 	Game::SwitchTurn();
 
 	Game::row_played = 0;
 	Game::column_played = 0;
+
 
 }
 
@@ -34,10 +42,9 @@ void Game::turn()
 void Game::amend_state()
 {
 
-
-	if (Game::WhoseTurn == 1) { Game::state[Game::column_played - 1][Game::row_played - 1] = gameboard.PlayerChar[0]; }
+	if (Game::WhoseTurn == 1) { Game::state[Game::column_played - 1][Game::row_played - 1] = board.PlayerChar[0]; }
 	
-	if (Game::WhoseTurn == 2) { Game::state[Game::column_played - 1][Game::row_played - 1] = gameboard.PlayerChar[1]; }
+	if (Game::WhoseTurn == 2) { Game::state[Game::column_played - 1][Game::row_played - 1] = board.PlayerChar[1]; }
 
 }
 
@@ -79,15 +86,37 @@ void Game::SwitchTurn()
 	bool switched = false;
 	if (Game::WhoseTurn == 1) {
 		Game::WhoseTurn = 2;
-		cout << "Switch Turn" << endl;
+		Game::move_count[0]++;
 		switched = true;
 	}
 
 	if ((Game::WhoseTurn == 2) && (switched == false)){
 		Game::WhoseTurn = 1;
-		cout << "Switch Turn" << endl;
-
-	}
+		Game::move_count[1]++;
+	}	
 }
 
 
+void Game::scan_state(char state[3][3])
+{
+	cout << "Youve played " << Game::row_played << "," << Game::column_played << endl;
+
+	
+	
+	if (Game::move_count[0]+Game::move_count[1] == 8) {
+		Game::draw = true;
+		Game::GameOver = true; }
+
+
+	/*
+	for (int i = 0; i < 3; i++) {
+			if (state[0][i])
+		return;
+
+		//star operation
+	//up
+
+	*/
+
+
+}

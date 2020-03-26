@@ -1,5 +1,6 @@
 #pragma once
 
+
 class Board
 {
 public:
@@ -10,6 +11,7 @@ public:
 	
 	void DrawBoard(char state[3][3]);
 	char InputChar();
+
 
 private:
 

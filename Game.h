@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Board.h"
 
 class Game
 
@@ -16,7 +15,9 @@ public:
 	void SwitchTurn();
 	void InputPosition();
 	bool GameOver = false;
-
+	int move_count[2];
+	void scan_state(char state[3][3]);
+	bool draw = false;
 
 private:
 
