@@ -9,13 +9,18 @@ Game Game1;
 
 int main() {
 	cout << "Welcome to naughts and crosses!" << endl;
-	
-	Game1.StartGame();
 
 	board.DrawBoard(board.BoardInit);
 
 
-	cout << "press enter to continue" << endl;
+	Game1.StartGame();	
+	
+	while (Game1.GameOver == false) {
+		Game1.turn();
+	}
+
+
+	cout << "press enter to quit" << endl;
 	cin.get();
 
 
