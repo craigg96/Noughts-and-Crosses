@@ -29,8 +29,10 @@ int main() {
 
 	}
 
-	cout << "press enter to quit" << endl;
-	cin.get();
+	cout << "press any key then enter to quit" << endl;
+
+	int end;
+	cin >> end;
 
 
 }
