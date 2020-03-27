@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Board.h"
-#include "Game.h"
 using namespace std;
 
 
@@ -20,11 +19,11 @@ void Board::SelectCharachters()
 void Board::DrawBoard(char state[3][3])
 {
 	cout << "-------------" << endl;
-	cout << "| " << state[0][0] << " | " << state[1][0] << " | " << state[2][0] << " |" << endl;
+	cout << "| " << state[0][0] << " | " << state[0][1] << " | " << state[0][2] << " |" << endl;
 	cout << "-------------" << endl;
-	cout << "| " << state[0][1] << " | " << state[1][1] << " | " << state[2][1] << " |" << endl;
+	cout << "| " << state[1][0] << " | " << state[1][1] << " | " << state[1][2] << " |" << endl;
 	cout << "-------------" << endl;
-	cout << "| " << state[0][2] << " | " << state[1][2] << " | " << state[2][2] << " |" << endl;
+	cout << "| " << state[2][0] << " | " << state[2][1] << " | " << state[2][2] << " |" << endl;
 	cout << "-------------" << endl;
 
 }

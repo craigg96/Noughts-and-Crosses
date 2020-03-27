@@ -15,13 +15,15 @@ void Game::StartGame()
 
 void Game::turn()
 {
-	cout << "Its player " << Game::WhoseTurn << "'s turn!" << endl;
+	cout << "Player " << Game::WhoseTurn << "'s turn." << endl;
 
 	Game::InputPosition();
 	
 	Game::amend_state();
 
 	board.DrawBoard(Game::state);
+
+	cout << "Youve played " << Game::row_played << "," << Game::column_played << endl << endl;
 
 	 Game::scan_state(Game::state);
 
@@ -42,9 +44,9 @@ void Game::turn()
 void Game::amend_state()
 {
 
-	if (Game::WhoseTurn == 1) { Game::state[Game::column_played - 1][Game::row_played - 1] = board.PlayerChar[0]; }
+	if (Game::WhoseTurn == 1) { Game::state[Game::row_played - 1][Game::column_played - 1] = board.PlayerChar[0]; }
 	
-	if (Game::WhoseTurn == 2) { Game::state[Game::column_played - 1][Game::row_played - 1] = board.PlayerChar[1]; }
+	if (Game::WhoseTurn == 2) { Game::state[Game::row_played - 1][Game::column_played - 1] = board.PlayerChar[1]; }
 
 }
 
@@ -79,6 +81,12 @@ void Game::InputPosition()
 		}
 
 	}
+
+	if ((Game::state[Game::row_played - 1][Game::column_played - 1] == board.PlayerChar[0])||(Game::state[Game::row_played - 1][Game::column_played - 1] == board.PlayerChar[1])) {
+		cout << endl << "Sorry that space is taken." << endl << endl;
+		Game::row_played = Game::column_played = 0;
+		Game::InputPosition();
+	}
 }
 
 void Game::SwitchTurn()
@@ -99,24 +107,54 @@ void Game::SwitchTurn()
 
 void Game::scan_state(char state[3][3])
 {
-	cout << "Youve played " << Game::row_played << "," << Game::column_played << endl;
 
+	int col = 0;
+	int row = 0;
+	int diag = 0;
+	int rdiag = 0;
+
+	for (int i = 0; i < 3; i++) {
+
+		if (state[Game::row_played-1][i] == board.PlayerChar[Game::WhoseTurn - 1]) {
+			col++;
+			//cout << "col = " << col << endl;
+		}
+
+		if (state[i][Game::column_played-1] == board.PlayerChar[Game::WhoseTurn - 1]) {
+			row++;
+			//cout << "row = " << row << endl;
+
+		}
+
+		if (state[i][i] == board.PlayerChar[Game::WhoseTurn - 1]) {
+			diag++;
+			//cout << "diag = " << diag << endl;
+
+		}
+
+		if (state[i][2 - i] == board.PlayerChar[Game::WhoseTurn - 1]) {
+			rdiag++;
+			//cout << "rdiag = " << rdiag << endl;
+
+		}
+
+		if ((row == 3) || (col == 3) || (diag == 3) || (rdiag == 3)) {
+			Game::GameOver = true;
+			return;
+		}
+
+	}
 	
-	
-	if (Game::move_count[0]+Game::move_count[1] == 8) {
+	col = 0;
+	row = 0;
+	diag = 0;
+	rdiag = 0;
+
+	if ((Game::move_count[0]+Game::move_count[1] == 8)&&(Game::GameOver == false)) {
 		Game::draw = true;
 		Game::GameOver = true; }
 
 
-	/*
-	for (int i = 0; i < 3; i++) {
-			if (state[0][i])
-		return;
-
-		//star operation
-	//up
-
-	*/
 
 
 }

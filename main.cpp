@@ -25,7 +25,7 @@ int main() {
 	}
 	else
 	{
-		cout << "Player " << game.WhoseTurn << " Wins!" << endl;
+		cout << "Player " << game.WhoseTurn << " won in " << game.move_count[game.WhoseTurn -1] << " moves." <<  endl;
 
 	}
 
