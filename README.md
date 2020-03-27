@@ -1,2 +1,2 @@
 # Noughts-and-Crosses
-Noughts and crosses game
+Noughts and crosses game .exe file
